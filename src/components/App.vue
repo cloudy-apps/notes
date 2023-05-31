@@ -63,7 +63,7 @@ export default defineComponent({
     }
 
     function onAdd() {
-      unref(notes).unshift({ uid: Date.now(), title: '', content: '', collapse: false });
+      unref(notes).unshift({ uid: String(Date.now()), title: '', content: '', collapse: false });
     }
 
     return { notes, onSave, onDelete, onAdd };
