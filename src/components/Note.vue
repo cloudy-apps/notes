@@ -1,6 +1,6 @@
 <template>
   <div class="relative bg-yellow-100 mx-auto rounded-xl shadow-md">
-    <button @click="onToggle" class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform" :class="note.collapse && 'rotate-180'">
+    <button @click="onToggle" class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform" :class="!note.collapse && 'rotate-180'">
       <span class="material-icons">expand_more</span>
     </button>
     <div>
