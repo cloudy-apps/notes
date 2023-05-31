@@ -24,7 +24,7 @@
     </header>
 
     <div class="flex flex-wrap gap-4">
-      <Note
+      <NoteCard
         class="mb-5 w-2/3 flex-grow"
         v-for="note in notes"
         :key="note.id"
@@ -37,18 +37,13 @@
 
 <script lang="ts">
 import { defineComponent, ref, unref } from 'vue';
-import Note from './Note.vue';
-
-interface Note {
-  id: number;
-  title: string;
-  content: string;
-}
+import NoteCard from './Note.vue';
+import { Note } from './types';
 
 export default defineComponent({
   name: 'App',
   components: {
-    Note,
+    NoteCard,
   },
   setup() {
     const notes = ref<Note[]>(

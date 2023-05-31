@@ -3,10 +3,10 @@
     class="relative py-6 bg-yellow-100 mx-auto rounded-xl shadow-md"
   >
     <button
-      @click="onDeleteNote"
-      class="absolute top-0 right-0 w-8 h-8 text-lg"
+      @click="onToggle"
+      class="absolute top-1 right-1 w-8 h-8 text-lg leading-none"
     >
-      <span class="material-icons">delete</span>
+      <span class="material-icons">expand_more</span>
     </button>
     <div>
       <input
@@ -18,21 +18,31 @@
         @input="onContentChange"
         class="text-gray-600 px-6 py-3 w-full block whitespace-pre-wrap"
         contenteditable="true"
+        v-if="!note.collapse"
       >
         {{ note.content }}
       </p>
+      <div class="text-right">
+        <button
+          @click="onDeleteNote"
+          class="w-8 h-8 text-lg leading-none"
+        >
+          <span class="material-icons">delete</span>
+        </button>
+      <div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Note } from './types';
 
 export default defineComponent({
   name: 'Note',
   props: {
     note: {
-      type: Object as () => { title: string; content: string },
+      type: Object as () => Note,
       required: true,
     },
   },
@@ -42,6 +52,10 @@ export default defineComponent({
     },
     onContentChange($event: any) {
       this.note.content = $event.target?.textContent;
+    },
+    onToggle() {
+      this.note.collapse = !this.note.collapse;
+      this.$emit('input');
     }
   },
 });
