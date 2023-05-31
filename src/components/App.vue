@@ -15,7 +15,7 @@
             h-16
             rounded-full
           "
-          @click="notes.unshift({ id: Date.now() })"
+          @click="onAdd"
         >
           ✏️
         </button>
@@ -66,7 +66,11 @@ export default defineComponent({
       }
     }
 
-    return { notes, onSave, onDelete };
+    function onAdd() {
+      unref(notes).unshift({ id: Date.now(), title: '', content: '' });
+    }
+
+    return { notes, onSave, onDelete, onAdd };
   },
 });
 </script>

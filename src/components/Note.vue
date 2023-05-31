@@ -1,7 +1,6 @@
 <template>
   <div
     class="relative py-6 bg-yellow-100 mx-auto rounded-xl shadow-md"
-    @click="onToggle"
   >
     <button
       @click="onDeleteNote"
@@ -16,7 +15,7 @@
         v-model="note.title"
       />
       <p
-        @input="note.content = $event.target.textContent"
+        @input="onContentChange"
         class="text-gray-600 px-6 py-3 w-full block whitespace-pre-wrap"
         contenteditable="true"
       >
@@ -41,6 +40,9 @@ export default defineComponent({
     onDeleteNote() {
       this.$emit('delete-note', this.note);
     },
+    onContentChange($event: any) {
+      this.note.content = $event.target?.textContent;
+    }
   },
 });
 </script>
