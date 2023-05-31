@@ -6,7 +6,7 @@
       @click="onDeleteNote"
       class="absolute top-0 right-0 w-8 h-8 text-lg"
     >
-      ❌
+      <span class="material-icons">delete</span>
     </button>
     <div>
       <input

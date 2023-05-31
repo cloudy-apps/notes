@@ -1,23 +1,24 @@
 <template>
   <div class="p-10" @input="onSave">
-    <header class="flex justify-items-stretch mb-10">
-      <h1 class="flex-grow">Notes</h1>
+    <header class="flex justify-items-stretch items-center mb-10">
+      <h1 class="flex-grow text-5xl">Notes</h1>
       <div class="text-right">
         <button
           class="
             top-2
             right-2
             rounded-lg
-            w
+            border
+            border-gray-500
             bg-white
             text-4xl
-            w-16
-            h-16
+            w-12
+            h-12
             rounded-full
           "
           @click="onAdd"
         >
-          ✏️
+          <span class="material-icons">edit</span>
         </button>
       </div>
     </header>
