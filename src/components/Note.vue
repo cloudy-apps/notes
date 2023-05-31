@@ -1,11 +1,6 @@
 <template>
-  <div
-    class="relative py-6 bg-yellow-100 mx-auto rounded-xl shadow-md"
-  >
-    <button
-      @click="onToggle"
-      class="absolute top-1 right-1 w-8 h-8 text-lg leading-none"
-    >
+  <div class="relative py-6 bg-yellow-100 mx-auto rounded-xl shadow-md">
+    <button @click="onToggle" class="absolute top-1 right-1 w-8 h-8 text-lg leading-none">
       <span class="material-icons">expand_more</span>
     </button>
     <div>
@@ -29,7 +24,7 @@
         >
           <span class="material-icons">delete</span>
         </button>
-      <div>
+      </div>
     </div>
   </div>
 </template>
