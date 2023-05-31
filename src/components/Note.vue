@@ -1,11 +1,11 @@
 <template>
-  <div class="relative py-6 bg-yellow-100 mx-auto rounded-xl shadow-md">
-    <button @click="onToggle" class="absolute top-1 right-1 w-8 h-8 text-lg leading-none">
+  <div class="relative bg-yellow-100 mx-auto rounded-xl shadow-md">
+    <button @click="onToggle" class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform" :class="note.collapse && 'rotate-180'">
       <span class="material-icons">expand_more</span>
     </button>
     <div>
       <input
-        class="text-xl px-6 font-medium text-black bg-transparent w-full"
+        class="text-xl pt-4 px-6 font-medium text-black bg-transparent w-full"
         placeholder="New note"
         v-model="note.title"
       />
@@ -20,7 +20,7 @@
       <div class="text-right">
         <button
           @click="onDeleteNote"
-          class="w-8 h-8 text-lg leading-none"
+          class="w-8 h-8 text-lg text-red-600 leading-none"
         >
           <span class="material-icons">delete</span>
         </button>
