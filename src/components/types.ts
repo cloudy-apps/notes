@@ -1,5 +1,5 @@
 export interface Note {
-  id: number;
+  uid: string;
   title: string;
   content: string;
   collapse: boolean;
