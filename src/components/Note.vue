@@ -9,14 +9,13 @@
         placeholder="New note"
         v-model="note.title"
       />
-      <p
-        @input="onContentChange"
+      <textarea
+        @change="onContentChange"
         class="text-gray-600 px-6 py-3 w-full block whitespace-pre-wrap"
-        contenteditable="true"
         v-if="!note.collapse"
       >
         {{ note.content }}
-      </p>
+      </textarea>
       <div class="text-right">
         <button
           @click="onDeleteNote"
