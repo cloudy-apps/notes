@@ -4,7 +4,7 @@
       <h1 class="flex-grow text-5xl text-white">Notes</h1>
       <div class="text-right" v-if="profile">
         <button
-          class="top-2 right-2 shadow-lg bg-white text-4xl w-12 h-12 rounded-full"
+          class="top-2 right-2 shadow-lg bg-white text-4xl text-primary w-12 h-12 rounded-full"
           @click="onAdd"
         >
           <span class="material-icons">edit</span>
@@ -12,7 +12,7 @@
       </div>
     </header>
     <button
-      class="flex mx-auto px-4 py-3 my-4 bg-white shadow-md rounded"
+      class="flex mx-auto px-4 py-3 my-4 bg-white text-primary shadow-md rounded"
       v-if="!profile"
       @click="signIn()"
     >
