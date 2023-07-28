@@ -75,6 +75,10 @@ onMounted(async function () {
   await ready;
 
   notesBackend = store.value.getResource("notes");
+
+  const list = await notesBackend.get("all");
+  notes.value = list || [];
+
   watch(notes, onSave, { deep: true });
 });
 </script>
