@@ -1,16 +1,14 @@
 <template>
   <div class="p-10">
-    <header class="flex justify-items-stretch items-center mb-10">
-      <h1 class="flex-grow text-5xl text-white">Notes</h1>
-      <div class="text-right" v-if="profile">
-        <button
-          class="top-2 right-2 shadow-lg bg-white text-4xl text-primary w-12 h-12 rounded-full"
-          @click="onAdd"
-        >
-          <span class="material-icons">edit</span>
-        </button>
-      </div>
-    </header>
+    <div class="z-10 absolute bottom-0 right-0 mr-4 mb-4" v-if="profile">
+      <button
+        class="shadow-lg bg-white text-4xl text-primary w-12 h-12 rounded-full"
+        @click="onAdd"
+      >
+        <span class="material-icons">edit</span>
+      </button>
+    </div>
+
     <button
       class="flex mx-auto px-4 py-3 my-4 bg-white text-primary shadow-md rounded"
       v-if="!profile"
@@ -55,7 +53,7 @@ const onSave = debounce(() => notesBackend.set("all", unref(notes)), 1000);
 function onDelete(note: Note) {
   const index = unref(notes).findIndex((n) => n.uid === note.uid);
 
-  if (index !== -1) {
+  if (index !== -1 && confirm("Are you sure?")) {
     notes.value.splice(index, 1);
     onSave();
   }
