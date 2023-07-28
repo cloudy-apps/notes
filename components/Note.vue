@@ -5,7 +5,7 @@
       class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform"
       :class="!note.collapse && 'rotate-180'"
     >
-      <span class="material-icons">expand_more</span>
+      <span class="material-icons text-primary">expand_more</span>
     </button>
     <div>
       <input
