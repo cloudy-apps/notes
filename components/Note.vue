@@ -15,7 +15,7 @@
       />
       <textarea
         v-model="note.content"
-        class="text-gray-600 px-6 py-3 w-full block whitespace-pre-wrap"
+        class="text-gray-600 px-6 py-3 w-full block bg-transparent whitespace-pre-wrap"
         v-if="!note.collapse"
       >
         {{ note.content }}

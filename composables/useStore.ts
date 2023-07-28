@@ -8,7 +8,7 @@ export function useStore() {
   const store = ref<any>(null);
   const ready = new Promise((resolve) => {
     onMounted(async function () {
-      let storeId = await getProperty(storeIdKey);
+      let storeId = (await getProperty(storeIdKey))?.value;
 
       if (!storeId) {
         storeId = await Store.create();
