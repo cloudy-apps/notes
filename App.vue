@@ -1,21 +1,22 @@
 <template>
   <div class="p-10">
-    <div class="z-10 absolute bottom-0 right-0 mr-4 mb-4" v-if="profile">
+    <div class="z-10 absolute bottom-0 right-0 mr-4 mb-4">
       <button
+        v-if="profile"
         class="shadow-lg bg-white text-4xl text-primary w-12 h-12 rounded-full"
         @click="onAdd"
       >
         <span class="material-icons">edit</span>
       </button>
+      <button
+        v-if="!profile"
+        class="shadow-lg bg-white text-4xl text-primary w-12 h-12 rounded-full"
+        @click="signIn()"
+      >
+        <span class="material-icons">account_circle</span>
+      </button>
     </div>
 
-    <button
-      class="flex mx-auto px-4 py-3 my-4 bg-white text-primary shadow-md rounded"
-      v-if="!profile"
-      @click="signIn()"
-    >
-      Sign in to start
-    </button>
     <div class="flex flex-wrap gap-4" v-if="profile">
       <NoteCard
         class="mb-5 w-2/3 flex-grow"
