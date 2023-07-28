@@ -1,29 +1,24 @@
 <template>
-  <div class="p-10" @input="onSave">
+  <div class="p-10">
     <header class="flex justify-items-stretch items-center mb-10">
       <h1 class="flex-grow text-5xl">Notes</h1>
-      <div class="text-right">
+      <div class="text-right" v-if="profile">
         <button
-          class="
-            top-2
-            right-2
-            rounded-lg
-            border
-            border-gray-500
-            bg-white
-            text-4xl
-            w-12
-            h-12
-            rounded-full
-          "
+          class="top-2 right-2 rounded-lg border border-gray-500 bg-white text-4xl w-12 h-12 rounded-full"
           @click="onAdd"
         >
           <span class="material-icons">edit</span>
         </button>
       </div>
     </header>
-
-    <div class="flex flex-wrap gap-4">
+    <button
+      class="flex mx-auto p-4 my-4 bg-blue-500"
+      v-if="!profile"
+      @click="signIn()"
+    >
+      Sign in to start
+    </button>
+    <div class="flex flex-wrap gap-4" v-if="profile">
       <NoteCard
         class="mb-5 w-2/3 flex-grow"
         v-for="note in notes"
@@ -35,38 +30,51 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, unref } from 'vue';
-import NoteCard from './components/Note.vue';
-import { Note } from './components/types';
+<script lang="ts" setup>
+import { onMounted, ref, unref, watch } from "vue";
+import { getProfile, signIn } from "https://auth.homebots.io/auth.js";
+import NoteCard from "./components/Note.vue";
+import { Note } from "./components/types";
+import { useStore } from "./composables/useStore";
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    NoteCard,
-  },
-  setup() {
-    const notes = ref<Note[]>(
-      localStorage.notes ? JSON.parse(localStorage.notes) : []
-    );
+let notesBackend;
+const { ready, store } = useStore();
 
-    function onSave() {
-      localStorage.notes = JSON.stringify(unref(notes));
-    }
+const notes = ref<Note[]>([]);
+const profile = ref(null);
+const debounce = function (fn: any, time: number) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), time);
+  };
+};
 
-    function onDelete(note: Note) {
-      const index = unref(notes).findIndex((n) => n.uid === note.uid);
-      if (index !== -1) {
-        notes.value.splice(index, 1);
-        onSave();
-      }
-    }
+const onSave = debounce(() => notesBackend.set("all", unref(notes)), 1000);
 
-    function onAdd() {
-      unref(notes).unshift({ uid: String(Date.now()), title: '', content: '', collapse: false });
-    }
+function onDelete(note: Note) {
+  const index = unref(notes).findIndex((n) => n.uid === note.uid);
 
-    return { notes, onSave, onDelete, onAdd };
-  },
+  if (index !== -1) {
+    notes.value.splice(index, 1);
+    onSave();
+  }
+}
+
+function onAdd() {
+  unref(notes).unshift({
+    uid: crypto.randomUUID(),
+    title: "",
+    content: "",
+    collapse: false,
+  });
+}
+
+onMounted(async function () {
+  profile.value = await getProfile();
+  await ready;
+
+  notesBackend = store.value.getResource("notes");
+  watch(notes, onSave, { deep: true });
 });
 </script>
