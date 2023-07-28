@@ -12,7 +12,7 @@
       </div>
     </header>
     <button
-      class="flex mx-auto px-4 py-3 my-4 bg-primary text-white rounded"
+      class="flex mx-auto px-4 py-3 my-4 bg-white shadow-md rounded"
       v-if="!profile"
       @click="signIn()"
     >
