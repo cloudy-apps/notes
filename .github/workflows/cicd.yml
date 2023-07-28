@@ -1,7 +1,5 @@
 on:
   push:
-    branches:
-    - main
 
 concurrency:
   group: ${{ github.ref }}
@@ -13,5 +11,4 @@ jobs:
     with:
       name: cloudy-apps/app-notes
       baseImage: cloud-cli/node:latest
-      defaultBranch: main
-      type: node
+      type: vite
