@@ -1,0 +1,26 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1">
+ <g>
+  <title>Layer 1</title>
+  <rect stroke="#000" fill="#e91e63" x="79.98613" y="217.99187" width="228" height="341" id="svg_8" stroke-width="4" rx="15" transform="rotate(72.3733 262.293 501.138) matrix(1.33704 0.166412 -0.125946 1.76661 51.8562 -217.46)"/>
+  <rect stroke="#000" fill="#3f51b5" x="106.54761" y="29.51968" width="228" height="341" id="svg_9" stroke-width="6" rx="15" transform="rotate(7.7807 255.047 249.499) matrix(1.25771 -0.165065 0.165065 1.25771 -55.3537 34.3371)"/>
+  <g id="svg_13">
+   <g stroke="null" id="svg_12">
+    <line stroke="#ffffff" id="svg_2" y2="293.5" x2="267.13433" y1="293.5" x1="140.26483" stroke-width="12" fill="none"/>
+    <line stroke="#ffffff" id="svg_3" y2="331.5" x2="267.13433" y1="331.5" x1="140.26483" stroke-width="12" fill="none"/>
+    <line stroke="#ffffff" id="svg_6" y2="331.5" x2="323.35061" y1="331.5" x1="283.23963" stroke-width="12" fill="none"/>
+    <line stroke="#ffffff" id="svg_10" y2="295.44449" x2="371.73517" y1="295.44449" x1="283.23963" stroke-width="12" fill="none"/>
+   </g>
+   <g stroke="null" id="svg_1">
+    <line stroke="#ffffff" id="svg_5" y2="369.50521" x2="267.13433" y1="369.50521" x1="140.26483" stroke-width="12" fill="none"/>
+    <line stroke="#ffffff" id="svg_7" y2="407.50521" x2="267.13433" y1="407.50521" x1="140.26483" stroke-width="12" fill="none"/>
+    <line stroke="#ffffff" id="svg_11" y2="407.50521" x2="323.35061" y1="407.50521" x1="283.23963" stroke-width="12" fill="none"/>
+    <line stroke="#ffffff" id="svg_4" y2="371.4497" x2="371.73517" y1="371.4497" x1="283.23963" stroke-width="12" fill="none"/>
+   </g>
+  </g>
+  <g stroke="null" id="svg_16">
+   <rect stroke="#000" transform="matrix(1.6147 0.70425 -0.70425 1.6147 -79.6072 -386.912)" id="svg_14" height="131" width="37" y="65.21624" x="318.80055" stroke-width="4" fill="#e91e63"/>
+   <path stroke="#000" id="svg_15" d="m352.63262,184.09411l-46.82944,33.07777l-9.15263,-56.59827l55.98206,23.5205z" stroke-width="4" fill="#ffffff"/>
+  </g>
+ </g>
+
+</svg>
