@@ -38,7 +38,7 @@
 <script lang="ts">
 import { defineComponent, ref, unref } from 'vue';
 import NoteCard from './Note.vue';
-import { Note } from './types';
+import { Note } from './src/components/types';
 
 export default defineComponent({
   name: 'App',
