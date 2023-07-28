@@ -1,10 +1,10 @@
 <template>
   <div class="p-10">
     <header class="flex justify-items-stretch items-center mb-10">
-      <h1 class="flex-grow text-5xl text-primary">Notes</h1>
+      <h1 class="flex-grow text-5xl text-white">Notes</h1>
       <div class="text-right" v-if="profile">
         <button
-          class="top-2 right-2 rounded-lg border border-gray-500 bg-white text-4xl w-12 h-12 rounded-full"
+          class="top-2 right-2 shadow-lg bg-white text-4xl w-12 h-12 rounded-full"
           @click="onAdd"
         >
           <span class="material-icons">edit</span>
@@ -12,7 +12,7 @@
       </div>
     </header>
     <button
-      class="flex mx-auto p-4 my-4 bg-primary text-white"
+      class="flex mx-auto px-4 py-3 my-4 bg-primary text-white rounded"
       v-if="!profile"
       @click="signIn()"
     >
