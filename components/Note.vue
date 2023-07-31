@@ -21,38 +21,77 @@
       >
         {{ note.content }}
       </textarea>
-      <div class="text-right">
+      <div class="ml-auto w-10 text-gray-900">
         <button
-          @click="onDeleteNote"
-          class="w-8 h-8 text-lg text-red-600 leading-none"
+          @click="tools = !tools"
+          class="transform"
+          :class="(tools && '-rotate-90') || 'rotate-90'"
         >
           <span class="material-icons">delete</span>
         </button>
+        <template v-if="tools">
+          <button
+            @click="onCreateChecklist"
+            class="w-8 h-8 text-lg leading-none"
+          >
+            <span
+              class="material-icons"
+              :class="generating && 'animate-spin'"
+              >{{ generating ? "refresh" : "checklist" }}</span
+            >
+          </button>
+          <button
+            @click="onDeleteNote"
+            class="w-8 h-8 text-lg text-red-600 leading-none"
+          >
+            <span class="material-icons">delete</span>
+          </button>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { ref } from "vue";
 import { Note } from "./types";
+import createChecklist from "https://aifn.run/fn/12c5cd32-9c33-4a4b-8a18-787a27df8109.js";
 
-export default defineComponent({
-  name: "Note",
-  props: {
-    note: {
-      type: Object as () => Note,
-      required: true,
-    },
-  },
-  methods: {
-    onDeleteNote() {
-      this.$emit("delete-note", this.note);
-    },
-    onToggle() {
-      this.note.collapse = !this.note.collapse;
-      this.$emit("input");
-    },
+const tools = ref(false);
+const generating = ref(false);
+const props = defineProps({
+  note: {
+    type: Object as () => Note,
+    required: true,
   },
 });
+
+function onDeleteNote() {
+  this.$emit("delete-note", props.note);
+}
+
+async function onCreateChecklist() {
+  generating.value = true;
+  const response = await createChecklist({ task: props.note.title });
+  const list = tryParse(response);
+
+  if (Array.isArray(list)) {
+    props.note.content = list.map((s) => `- [ ] ${s}`).join("\n");
+  }
+
+  generating.value = false;
+}
+
+function tryParse(input: string) {
+  try {
+    return JSON.parse(input);
+  } catch {
+    return null;
+  }
+}
+
+function onToggle() {
+  props.note.collapse = !props.note.collapse;
+  this.$emit("input");
+}
 </script>

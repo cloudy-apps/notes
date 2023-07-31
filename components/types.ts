@@ -3,4 +3,5 @@ export interface Note {
   title: string;
   content: string;
   collapse: boolean;
+  html: boolean;
 }
