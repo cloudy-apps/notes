@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-white mx-auto rounded shadow-md">
+  <div class="relative bg-white mx-auto rounded shadow-md py-3">
     <button
       @click="onToggle"
       class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform"
@@ -9,7 +9,7 @@
     </button>
     <div>
       <input
-        class="text-lg pt-4 px-6 font-medium text-black bg-transparent w-full"
+        class="text-lg px-6 font-medium text-black bg-transparent w-full"
         placeholder="New note"
         v-model="note.title"
       />
@@ -21,10 +21,10 @@
       >
         {{ note.content }}
       </textarea>
-      <div class="ml-auto justify-end text-gray-900">
+      <div class="flex justify-end text-gray-900">
         <button
           @click="tools = !tools"
-          class="transform w-8 h-8 text-lg leading-none"
+          class="transform w-8 h-8 text-lg leading-none p-1"
           :class="(tools && '-rotate-90') || 'rotate-90'"
         >
           <span class="material-icons text-primary">expand_more</span>
