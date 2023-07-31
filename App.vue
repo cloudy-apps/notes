@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <div class="flex flex-wrap gap-4" v-if="profile">
+    <div class="flex flex-wrap gap-2" v-if="profile">
       <NoteCard
         class="w-full flex-grow"
         v-for="note in notes"
@@ -61,7 +61,7 @@ function onDelete(note: Note) {
 }
 
 function onAdd() {
-  unref(notes).unshift({
+  unref(notes).push({
     uid: crypto.randomUUID(),
     title: "",
     content: "",

@@ -15,7 +15,7 @@
       />
       <textarea
         v-model="note.content"
-        class="text-gray-600 text-sm px-3 mx-3 py-3 w-full block bg-transparent whitespace-pre-wrap"
+        class="text-gray-600 text-sm px-6 py-3 w-full block bg-transparent whitespace-pre-wrap"
         placeholder="Note..."
         v-if="!note.collapse"
       >
