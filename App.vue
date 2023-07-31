@@ -19,7 +19,7 @@
 
     <div class="flex flex-wrap gap-4" v-if="profile">
       <NoteCard
-        class="w-2/3 flex-grow"
+        class="w-full flex-grow"
         v-for="note in notes"
         :key="note.uid"
         :note="note"

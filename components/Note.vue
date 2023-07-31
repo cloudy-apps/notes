@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-white mx-auto rounded-xl shadow-md">
+  <div class="relative bg-white mx-auto rounded shadow-md">
     <button
       @click="onToggle"
       class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform"
@@ -9,13 +9,14 @@
     </button>
     <div>
       <input
-        class="text-xl pt-4 px-6 font-medium text-black bg-transparent w-full"
+        class="text-lg pt-4 px-6 font-medium text-black bg-transparent w-full"
         placeholder="New note"
         v-model="note.title"
       />
       <textarea
         v-model="note.content"
-        class="text-gray-600 px-6 py-3 w-full block bg-transparent whitespace-pre-wrap"
+        class="text-gray-600 text-sm px-3 mx-3 py-3 w-full block bg-transparent whitespace-pre-wrap"
+        placeholder="Note..."
         v-if="!note.collapse"
       >
         {{ note.content }}
