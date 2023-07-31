@@ -21,18 +21,18 @@
       >
         {{ note.content }}
       </textarea>
-      <div class="ml-auto w-10 text-gray-900">
+      <div class="ml-auto justify-end text-gray-900">
         <button
           @click="tools = !tools"
-          class="transform"
+          class="transform w-8 h-8 text-lg leading-none"
           :class="(tools && '-rotate-90') || 'rotate-90'"
         >
-          <span class="material-icons">delete</span>
+          <span class="material-icons text-primary">expand_more</span>
         </button>
         <template v-if="tools">
           <button
             @click="onCreateChecklist"
-            class="w-8 h-8 text-lg leading-none"
+            class="w-8 h-8 text-lg leading-none p-1 bg-gray-100 rounded-sm"
           >
             <span
               class="material-icons"
@@ -42,9 +42,9 @@
           </button>
           <button
             @click="onDeleteNote"
-            class="w-8 h-8 text-lg text-red-600 leading-none"
+            class="w-8 h-8 text-lg leading-none p-1 bg-gray-100 rounded-sm"
           >
-            <span class="material-icons">delete</span>
+            <span class="material-icons text-red-600">delete</span>
           </button>
         </template>
       </div>
@@ -59,6 +59,7 @@ import createChecklist from "https://aifn.run/fn/12c5cd32-9c33-4a4b-8a18-787a27d
 
 const tools = ref(false);
 const generating = ref(false);
+const emit = defineEmits(["delete-note"]);
 const props = defineProps({
   note: {
     type: Object as () => Note,
@@ -67,7 +68,7 @@ const props = defineProps({
 });
 
 function onDeleteNote() {
-  this.$emit("delete-note", props.note);
+  emit("delete-note", props.note);
 }
 
 async function onCreateChecklist() {
