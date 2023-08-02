@@ -7,7 +7,7 @@
     >
       <span class="material-icons text-primary">expand_more</span>
     </button>
-    <div>
+    <div class="text-gray-800">
       <input
         class="text-lg px-6 font-medium text-black bg-transparent w-full"
         placeholder="New note"
@@ -17,17 +17,17 @@
         <template v-if="note.type == 'text' || !note.type">
           <textarea
             v-model="note.content"
-            class="text-gray-600 text-sm px-6 py-3 w-full block bg-transparent whitespace-pre-wrap"
+            class="text-sm px-6 py-3 w-full block bg-transparent whitespace-pre-wrap"
             placeholder="Note..."
           ></textarea>
         </template>
         <template v-if="note.type == 'tasks'">
-          <div v-for="task of note.tasks" class="flex">
+          <div v-for="task of note.tasks" class="flex px-2 py-3 text-sm">
             <input v-model="task.completed" type="checkbox" class="mr-2" />
             <input
               v-model="task.task"
               type="text"
-              class="bg-transparent border-0 flex-grow"
+              class="bg-transparent border-0 flex-grow text-sm"
             />
           </div>
           <div class="text-right pt-2">
@@ -40,12 +40,12 @@
           </div>
         </template>
         <template v-if="note.type == 'html'">
-          <div contenteditable="true" @change="onNoteHtmlChange(note, $event)">
+          <div class="" contenteditable="true" @change="onNoteHtmlChange(note, $event)">
             {{ note.html }}
           </div>
         </template>
       </template>
-      <div class="flex justify-end text-gray-900">
+      <div class="flex justify-end text-gray-900" v-if="!note.collapse">
         <button
           @click="tools = !tools"
           class="transform w-8 h-8 text-lg leading-none p-1"
@@ -53,7 +53,7 @@
         >
           <span class="material-icons text-primary">expand_more</span>
         </button>
-        <template v-if="tools">
+        <div class="shadow" v-if="tools">
           <button
             @click="onCreateChecklist"
             class="w-8 h-8 text-lg leading-none p-1 bg-gray-100 rounded-sm"
@@ -82,7 +82,7 @@
           >
             <span class="material-icons text-red-600">delete</span>
           </button>
-        </template>
+        </div>
       </div>
     </div>
   </div>
