@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div class="">
     <div class="z-10 absolute bottom-0 right-0 mr-4 mb-4">
       <button
         v-if="profile"
@@ -17,9 +17,9 @@
       </button>
     </div>
 
-    <div class="flex flex-wrap gap-2" v-if="profile">
+    <div class="h-screen overflow-y-auto p-4" v-if="profile">
       <NoteCard
-        class="w-full flex-grow"
+        class="w-full mb-2"
         v-for="note in notes"
         :key="note.uid"
         :note="note"
