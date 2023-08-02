@@ -6,8 +6,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/cloudy-apps/notes.git"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

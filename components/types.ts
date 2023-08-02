@@ -1,7 +1,9 @@
-export interface Note {
+export type Note = {
   uid: string;
   title: string;
-  content: string;
   collapse: boolean;
-  html: boolean;
-}
+  type: "text" | "html" | "tasks";
+  content?: string;
+  html?: string;
+  tasks?: Array<{ task: string; completed: boolean }>;
+};
