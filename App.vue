@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <div class="h-screen overflow-y-auto p-4" v-if="profile">
+    <div class="h-screen overflow-y-auto p-4 pb-20" v-if="profile">
       <NoteCard
         class="w-full mb-2"
         v-for="note in notes"

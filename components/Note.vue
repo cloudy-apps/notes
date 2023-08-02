@@ -53,10 +53,10 @@
         >
           <span class="material-icons text-primary">expand_more</span>
         </button>
-        <div class="shadow" v-if="tools">
+        <div class="shadow bg-gray-100 rounded-sm" v-if="tools">
           <button
             @click="onCreateChecklist"
-            class="w-8 h-8 text-lg leading-none p-1 bg-gray-100 rounded-sm"
+            class="w-8 h-8 text-lg leading-none p-1"
           >
             <span
               class="material-icons"
@@ -66,19 +66,19 @@
           </button>
           <button
             @click="onUseText"
-            class="w-8 h-8 text-lg leading-none p-1 bg-gray-100 rounded-sm"
+            class="w-8 h-8 text-lg leading-none p-1"
           >
             <span class="material-icons">article</span>
           </button>
           <button
             @click="onUseHtml"
-            class="w-8 h-8 text-lg leading-none p-1 bg-gray-100 rounded-sm"
+            class="w-8 h-8 text-lg leading-none p-1"
           >
             <span class="material-icons">code</span>
           </button>
           <button
             @click="onDeleteNote"
-            class="w-8 h-8 text-lg leading-none p-1 bg-gray-100 rounded-sm"
+            class="w-8 h-8 text-lg leading-none p-1"
           >
             <span class="material-icons text-red-600">delete</span>
           </button>
