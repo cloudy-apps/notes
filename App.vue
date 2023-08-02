@@ -65,7 +65,8 @@ function onAdd() {
     uid: crypto.randomUUID(),
     title: "",
     content: "",
-    collapse: false,
+    collapse: true,
+    type: 'text',
   });
 }
 
