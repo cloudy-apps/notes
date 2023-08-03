@@ -9,7 +9,7 @@
     </button>
     <div class="text-gray-800">
       <input
-        class="text-lg px-6 font-medium text-black bg-transparent w-full"
+        class="text-lg pl-3 pr-8 font-medium text-black bg-transparent w-full"
         placeholder="New note"
         v-model="note.title"
       />
@@ -26,6 +26,7 @@
             <input v-model="task.completed" type="checkbox" class="mr-2" />
             <input
               v-model="task.task"
+              @keyup="onTaskKeyUp($event, task)"
               type="text"
               class="bg-transparent border-0 flex-grow text-sm"
             />
@@ -40,20 +41,18 @@
           </div>
         </template>
         <template v-if="note.type == 'html'">
-          <div class="" contenteditable="true" @change="onNoteHtmlChange(note, $event)">
+          <div
+            class=""
+            contenteditable="true"
+            @change="onNoteHtmlChange(note, $event)"
+          >
             {{ note.html }}
           </div>
         </template>
-      </template>
-      <div class="flex justify-end text-gray-900" v-if="!note.collapse">
-        <button
-          @click="tools = !tools"
-          class="transform w-8 h-8 text-lg leading-none p-1"
-          :class="(tools && '-rotate-90') || 'rotate-90'"
+
+        <div
+          class="flex justify-end text-gray-900 shadow bg-gray-100 rounded-sm ml-auto"
         >
-          <span class="material-icons text-primary">expand_more</span>
-        </button>
-        <div class="shadow bg-gray-100 rounded-sm" v-if="tools">
           <button
             @click="onCreateChecklist"
             class="w-8 h-8 text-lg leading-none p-1"
@@ -64,16 +63,10 @@
               >{{ generating ? "refresh" : "checklist" }}</span
             >
           </button>
-          <button
-            @click="onUseText"
-            class="w-8 h-8 text-lg leading-none p-1"
-          >
+          <button @click="onUseText" class="w-8 h-8 text-lg leading-none p-1">
             <span class="material-icons">article</span>
           </button>
-          <button
-            @click="onUseHtml"
-            class="w-8 h-8 text-lg leading-none p-1"
-          >
+          <button @click="onUseHtml" class="w-8 h-8 text-lg leading-none p-1">
             <span class="material-icons">code</span>
           </button>
           <button
@@ -83,17 +76,16 @@
             <span class="material-icons text-red-600">delete</span>
           </button>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { Note } from "./types";
+import type { Note, Task } from "./types";
 import createChecklist from "https://aifn.run/fn/12c5cd32-9c33-4a4b-8a18-787a27df8109.js";
 
-const tools = ref(false);
 const generating = ref(false);
 const emit = defineEmits(["delete-note"]);
 const props = defineProps({
@@ -130,6 +122,12 @@ async function onCreateChecklist() {
   }
 
   generating.value = false;
+}
+
+function onTaskKeyUp(event: KeyboardEvent, task: Task) {
+  if (event.code === "Backspace" && (event.target as any).value === "") {
+    props.note.tasks = props.note.tasks?.filter((t) => t !== task);
+  }
 }
 
 function tryParse(input: string) {
