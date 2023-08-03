@@ -9,7 +9,7 @@
     </button>
     <div class="text-gray-800">
       <input
-        class="text-lg pl-3 mt-3 pr-8 font-medium text-black bg-transparent w-full"
+        class="text-lg pl-3 pr-8 font-medium text-black bg-transparent w-full"
         placeholder="New note"
         v-model="note.title"
       />
@@ -104,7 +104,9 @@ const props = defineProps({
   },
 });
 
-const textHeight = computed(() => props.note.content?.split("\n").length || 2);
+const textHeight = computed(
+  () => (props.note.content?.split("\n").length || 1) + 1
+);
 
 function onNoteHtmlChange(note, $event) {
   note.html = $event.target.textContent;
