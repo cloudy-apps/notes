@@ -15,12 +15,14 @@
       />
       <template v-if="!note.collapse">
         <template v-if="note.type == 'text' || !note.type">
-          <textarea
-            v-model="note.content"
-            :rows="textHeight"
-            class="m-3 p-3 bg-gray-100 rounded text-sm w-full block bg-transparent whitespace-pre-wrap"
-            placeholder="Note..."
-          ></textarea>
+          <div class="m-3 p-3 bg-gray-100 rounded text-sm">
+            <textarea
+              v-model="note.content"
+              :rows="textHeight"
+              class="text-sm w-full block bg-transparent whitespace-pre-wrap"
+              placeholder="Note..."
+            ></textarea>
+          </div>
         </template>
         <template v-if="note.type == 'tasks'">
           <div v-for="task of note.tasks" class="flex px-2 py-3 text-sm">
@@ -61,8 +63,14 @@
             <span
               class="material-icons"
               :class="generating && 'animate-spin'"
-              >{{ generating ? "refresh" : "checklist" }}</span
+              >{{ generating ? "refresh" : "auto_awesome" }}</span
             >
+          </button>
+          <button
+            @click="onUseCheckList"
+            class="w-8 h-8 text-lg leading-none p-1"
+          >
+            <span class="material-icons">checklist</span>
           </button>
           <button @click="onUseText" class="w-8 h-8 text-lg leading-none p-1">
             <span class="material-icons">article</span>
@@ -112,6 +120,10 @@ function onUseHtml() {
 
 function onUseText() {
   props.note.type = "text";
+}
+
+function onUseCheckList() {
+  props.note.type = "tasks";
 }
 
 async function onCreateChecklist() {
