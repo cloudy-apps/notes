@@ -154,7 +154,8 @@ function onTaskKeyUp(event: KeyboardEvent, task: Task) {
   }
 
   if (event.code === "Enter") {
-    const index = props.note.tasks?.indexOf(task);
+    const index = Number(props.note.tasks?.indexOf(task) || 0) + 1;
+
     props.note.tasks = props.note.tasks
       ?.slice(0, index)
       .concat({ completed: false, task: "" })
