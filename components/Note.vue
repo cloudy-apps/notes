@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-white rounded shadow-md">
+  <div class="relative bg-white rounded shadow-md py-2">
     <button
       @click="onToggle"
       class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform"
@@ -54,7 +54,7 @@
         </template>
 
         <div
-          class="flex gap-2 justify-end text-gray-900 bg-gray-100 rounded-sm mt-3"
+          class="flex gap-2 justify-end text-gray-900 bg-gray-100 rounded-sm mt-3 shadow"
         >
           <button
             @click="onCreateChecklist"
