@@ -25,7 +25,7 @@
           </div>
         </template>
         <template v-if="note.type == 'tasks'">
-          <div v-for="task of note.tasks" class="flex px-2 py-3 text-sm">
+          <div v-for="task of note.tasks" class="flex px-2 py-3 text-sm mx-1">
             <input v-model="task.completed" type="checkbox" class="mr-2" />
             <input
               v-model="task.task"
