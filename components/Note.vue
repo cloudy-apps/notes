@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-white mx-auto rounded shadow-md py-3">
+  <div class="relative bg-white rounded shadow-md">
     <button
       @click="onToggle"
       class="absolute top-1 right-1 w-8 h-8 text-lg leading-none transition transform"
@@ -9,7 +9,7 @@
     </button>
     <div class="text-gray-800">
       <input
-        class="text-lg pl-3 pr-8 font-medium text-black bg-transparent w-full"
+        class="text-lg pl-3 mt-3 pr-8 font-medium text-black bg-transparent w-full"
         placeholder="New note"
         v-model="note.title"
       />
@@ -17,7 +17,8 @@
         <template v-if="note.type == 'text' || !note.type">
           <textarea
             v-model="note.content"
-            class="text-sm px-6 py-3 w-full block bg-transparent whitespace-pre-wrap"
+            :rows="textHeight"
+            class="m-3 p-3 bg-gray-100 rounded text-sm w-full block bg-transparent whitespace-pre-wrap"
             placeholder="Note..."
           ></textarea>
         </template>
@@ -42,7 +43,7 @@
         </template>
         <template v-if="note.type == 'html'">
           <div
-            class=""
+            class="m-3 p-3 bg-gray-100 rounded text-sm"
             contenteditable="true"
             @change="onNoteHtmlChange(note, $event)"
           >
@@ -51,7 +52,7 @@
         </template>
 
         <div
-          class="flex justify-end text-gray-900 shadow bg-gray-100 rounded-sm ml-auto"
+          class="flex gap-2 justify-end text-gray-900 bg-gray-100 rounded-sm mt-3"
         >
           <button
             @click="onCreateChecklist"
@@ -82,7 +83,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import type { Note, Task } from "./types";
 import createChecklist from "https://aifn.run/fn/12c5cd32-9c33-4a4b-8a18-787a27df8109.js";
 
@@ -94,6 +95,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const textHeight = computed(() => props.note.content?.split("\n").length || 2);
 
 function onNoteHtmlChange(note, $event) {
   note.html = $event.target.textContent;
@@ -113,7 +116,13 @@ function onUseText() {
 
 async function onCreateChecklist() {
   generating.value = true;
-  const response = await createChecklist({ task: props.note.title });
+  const task = props.note.title;
+  const context = props.note.tasks?.map((n) => n.task).join("\n");
+  const response = await createChecklist({
+    task,
+    context: context ? "Previous tasks in the list:\n" + context : "",
+  });
+
   const list = tryParse(response);
 
   if (Array.isArray(list)) {
@@ -125,8 +134,19 @@ async function onCreateChecklist() {
 }
 
 function onTaskKeyUp(event: KeyboardEvent, task: Task) {
-  if (event.code === "Backspace" && (event.target as any).value === "") {
+  const target = event.target as HTMLInputElement;
+
+  if (event.code === "Backspace" && target.value === "") {
+    (target.parentNode?.previousSibling?.childNodes[1] as any).focus();
     props.note.tasks = props.note.tasks?.filter((t) => t !== task);
+  }
+
+  if (event.code === "Enter") {
+    const index = props.note.tasks?.indexOf(task);
+    props.note.tasks = props.note.tasks
+      ?.slice(0, index)
+      .concat({ completed: false, task: "" })
+      .concat(props.note.tasks.slice(index));
   }
 }
 
