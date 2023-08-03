@@ -34,11 +34,8 @@
               class="bg-transparent border-0 flex-grow text-sm"
             />
           </div>
-          <div class="text-right pt-2">
-            <button
-              class="text-sm"
-              @click="note.tasks?.push({ completed: false, task: '' })"
-            >
+          <div class="pt-2">
+            <button class="text-sm p-1" @click="onAddTask()">
               <span class="material-icons text-primary">add</span>
             </button>
           </div>
@@ -126,6 +123,7 @@ function onUseText() {
 
 function onUseCheckList() {
   props.note.type = "tasks";
+  props.note.tasks ||= [];
 }
 
 async function onCreateChecklist() {
@@ -163,6 +161,10 @@ function onTaskKeyUp(event: KeyboardEvent, task: Task) {
       .concat({ completed: false, task: "" })
       .concat(props.note.tasks.slice(index));
   }
+}
+
+function onAddTask() {
+  props.note.tasks?.push({ completed: false, task: "" });
 }
 
 function tryParse(input: string) {
