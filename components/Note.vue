@@ -44,7 +44,7 @@
           <div
             class="m-3 p-3 bg-gray-100 rounded text-sm"
             contenteditable="true"
-            @change="onNoteHtmlChange(note, $event)"
+            @input="onNoteHtmlChange(note, $event)"
           >
             <div v-html="note.html"></div>
           </div>
@@ -102,13 +102,22 @@ const props = defineProps({
   },
 });
 
+function debounce(fn, delay = 500) {
+  let timeoutId;
+
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+}
+
 const textHeight = computed(
   () => (props.note.content?.split("\n").length || 1) + 1
 );
 
-function onNoteHtmlChange(note, $event) {
+const onNoteHtmlChange = debounce((note, $event) => {
   note.html = $event.target.innerHTML;
-}
+});
 
 function onDeleteNote() {
   emit("delete-note", props.note);
