@@ -46,7 +46,7 @@
             contenteditable="true"
             @change="onNoteHtmlChange(note, $event)"
           >
-            {{ note.html }}
+            <div v-html="note.html"></div>
           </div>
         </template>
 
@@ -107,7 +107,7 @@ const textHeight = computed(
 );
 
 function onNoteHtmlChange(note, $event) {
-  note.html = $event.target.textContent;
+  note.html = $event.target.innerHTML;
 }
 
 function onDeleteNote() {
