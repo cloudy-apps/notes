@@ -94,7 +94,7 @@ import createChecklist from "https://aifn.run/fn/12c5cd32-9c33-4a4b-8a18-787a27d
 import enhanceTextNote from "https://aifn.run/fn/1256f730-a632-49f0-87a0-a0f523be9edc.js";
 
 const generating = ref(false);
-const emit = defineEmits(["delete-note"]);
+const emit = defineEmits(["delete-note", "input"]);
 const props = defineProps({
   note: {
     type: Object as () => Note,
@@ -196,6 +196,6 @@ function tryParse(input: string) {
 
 function onToggle() {
   props.note.collapse = !props.note.collapse;
-  this.$emit("input");
+  emit("input");
 }
 </script>
