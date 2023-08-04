@@ -54,7 +54,7 @@
           class="flex gap-2 justify-end text-gray-900 bg-gray-100 rounded-sm mt-3 shadow"
         >
           <button
-            @click="onCreateChecklist"
+            @click="onNoteAutomagic"
             class="w-8 h-8 text-lg leading-none p-1"
           >
             <span
@@ -91,6 +91,7 @@
 import { ref, computed } from "vue";
 import type { Note, Task } from "./types";
 import createChecklist from "https://aifn.run/fn/12c5cd32-9c33-4a4b-8a18-787a27df8109.js";
+import enhanceTextNote from "https://aifn.run/fn/1256f730-a632-49f0-87a0-a0f523be9edc.js";
 
 const generating = ref(false);
 const emit = defineEmits(["delete-note"]);
@@ -126,10 +127,31 @@ function onUseCheckList() {
   props.note.tasks ||= [];
 }
 
-async function onCreateChecklist() {
+async function onNoteAutomagic() {
   generating.value = true;
+  const type = props.note.type;
+
+  if (type === "tasks") {
+    await generateChecList();
+  }
+
+  if (type === "text") {
+    await updateText();
+  }
+
+  generating.value = false;
+}
+
+async function updateText() {
+  const title = props.note.title;
+  const text = props.note.content;
+  props.note.content = await enhanceTextNote({ title, text });
+}
+
+async function generateChecList() {
   const task = props.note.title;
   const context = props.note.tasks?.map((n) => n.task).join("\n");
+
   const response = await createChecklist({
     task,
     context: context ? "Previous tasks in the list:\n" + context : "",
@@ -138,11 +160,8 @@ async function onCreateChecklist() {
   const list = tryParse(response);
 
   if (Array.isArray(list)) {
-    props.note.type = "tasks";
     props.note.tasks = list.map((task) => ({ completed: false, task }));
   }
-
-  generating.value = false;
 }
 
 function onTaskKeyUp(event: KeyboardEvent, task: Task) {
