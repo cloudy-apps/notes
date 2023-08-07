@@ -4,18 +4,18 @@
   "description": "Just take some notes",
   "icons": [
     {
-      "src": "/notes.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "/notes.svg",
+      "src": "/icon.svg",
       "sizes": "512x512",
       "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": "https://notes.homebots.io/",
   "display": "standalone",
   "theme_color": "#e91e63",
-  "background_color": "#ffffff"
+  "background_color": "#e91e63"
 }
