@@ -44,9 +44,9 @@
           <div
             class="m-3 p-3 bg-gray-100 rounded text-sm"
             contenteditable="true"
-            @input="onNoteHtmlChange(note, $event)"
+            @input="onNoteHtmlChange($event)"
           >
-            <div v-html="note.html"></div>
+            <div v-html="noteHTML"></div>
           </div>
         </template>
 
@@ -93,6 +93,7 @@ import type { Note, Task } from "./types";
 import createChecklist from "https://aifn.run/fn/12c5cd32-9c33-4a4b-8a18-787a27df8109.js";
 import enhanceTextNote from "https://aifn.run/fn/1256f730-a632-49f0-87a0-a0f523be9edc.js";
 
+const noteHTML = ref('');
 const generating = ref(false);
 const emit = defineEmits(["delete-note", "input"]);
 const props = defineProps({
@@ -115,8 +116,8 @@ const textHeight = computed(
   () => (props.note.content?.split("\n").length || 1) + 1
 );
 
-const onNoteHtmlChange = debounce((note, $event) => {
-  note.html = $event.target.innerHTML;
+const onNoteHtmlChange = debounce(($event) => {
+  props.note.html = $event.target.innerHTML;
 });
 
 function onDeleteNote() {
@@ -125,6 +126,9 @@ function onDeleteNote() {
 
 function onUseHtml() {
   props.note.type = "html";
+  if (!noteHTML.value) {
+    noteHTML.value = props.note.html || '';
+  }
 }
 
 function onUseText() {
