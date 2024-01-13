@@ -1,3 +1,3 @@
-# notes
+# Notes
 
 Take notes
